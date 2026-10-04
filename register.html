@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Register Patient</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8fc;
+            color: #1f2937;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: linear-gradient(135deg, #0d6efd, #084298);
+            color: white;
+            padding: 22px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 25px;
+        }
+
+        .header p {
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        .logout {
+            background: white;
+            color: #0d6efd;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+
+        /* MAIN */
+
+        .container {
+            width: 92%;
+            max-width: 850px;
+            margin: 35px auto;
+        }
+
+
+        /* TITLE */
+
+        .title {
+            margin-bottom: 25px;
+        }
+
+        .title h2 {
+            color: #123b64;
+            font-size: 28px;
+        }
+
+        .title p {
+            color: #6b7280;
+            margin-top: 7px;
+        }
+
+
+        /* FORM CARD */
+
+        .form-card {
+            background: white;
+            padding: 35px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.08);
+        }
+
+
+        .section-title {
+            color: #123b64;
+            font-size: 20px;
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e5edf5;
+        }
+
+
+        /* FORM GRID */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .full {
+            grid-column: 1 / 3;
+        }
+
+
+        label {
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+
+        .required {
+            color: #dc3545;
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #d5dce5;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            background: white;
+
+            outline: none;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            border-color: #0d6efd;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(13, 110, 253, 0.10);
+        }
+
+
+        .hint {
+            color: #8a94a3;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+
+        /* BUTTONS */
+
+        .buttons {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            margin-top: 30px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #e5edf5;
+        }
+
+
+        .btn {
+
+            padding: 12px 22px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+
+        .btn-primary {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd,
+                    #084298
+                );
+
+            color: white;
+        }
+
+
+        .btn-secondary {
+
+            background: #eef4fa;
+
+            color: #315777;
+        }
+
+
+        /* INFORMATION */
+
+        .info {
+
+            margin-top: 20px;
+
+            padding: 15px 18px;
+
+            background: #eef7ff;
+
+            border-left: 4px solid #0d6efd;
+
+            border-radius: 7px;
+
+            color: #315777;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* MOBILE */
+
+        @media(max-width: 700px) {
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 19px;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .form-card {
+                padding: 25px 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: 1;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <div>
+
+        <h1>
+            🏥 Smart Patient Case-Taking System
+        </h1>
+
+        <p>
+            Patient Registration
+        </p>
+
+    </div>
+
+
+    <a
+        href="/logout"
+        class="logout">
+
+        Logout
+
+    </a>
+
+</div>
+
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+
+    <div class="title">
+
+        <h2>
+            Register New Patient
+        </h2>
+
+        <p>
+            Enter the basic details of the patient
+            to create a new patient record.
+        </p>
+
+    </div>
+
+
+
+    <!-- FORM -->
+
+    <div class="form-card">
+
+
+        <h3 class="section-title">
+            👤 Patient Information
+        </h3>
+
+
+        <form method="POST"
+              action="/register">
+
+
+            <div class="form-grid">
+
+
+                <!-- NAME -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Patient Name
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Enter patient's full name"
+                        required
+                    >
+
+                    <span class="hint">
+                        Enter the patient's name as recorded in the hospital.
+                    </span>
+
+                </div>
+
+
+
+                <!-- AGE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Age
+                        <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="number"
+                        name="age"
+                        min="0"
+                        max="120"
+                        placeholder="Enter age"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- GENDER -->
+
+                <div class="form-group">
+
+                    <label>
+                        Gender
+                        <span class="required">*</span>
+                    </label>
+
+                    <select
+                        name="gender"
+                        required>
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DEPARTMENT -->
+
+                <div class="form-group full">
+
+                    <label>
+                        Department
+                        <span class="required">*</span>
+                    </label>
+
+                    <select
+                        name="department"
+                        required>
+
+                        <option value="">
+                            Select Department
+                        </option>
+
+                        <option value="General Medicine">
+                            General Medicine
+                        </option>
+
+                        <option value="Pediatrics">
+                            Pediatrics
+                        </option>
+
+                    </select>
+
+                    <span class="hint">
+                        The selected department determines
+                        the appropriate case-taking form.
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- INFORMATION -->
+
+            <div class="info">
+
+                <b>Next Step:</b>
+
+                After registration, the system will
+                automatically create the patient profile.
+                You can then add the patient's visit
+                and case details.
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <a
+                    href="/patients"
+                    class="btn btn-secondary">
+
+                    Cancel
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    ✓ Register Patient
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

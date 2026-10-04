@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Login - Smart Patient Case-Taking System</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eaf4ff,
+                    #f7fbff
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        /* MAIN CONTAINER */
+
+        .container {
+
+            width: 900px;
+
+            max-width: 92%;
+
+            min-height: 520px;
+
+            background: white;
+
+            border-radius: 22px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 70, 130, 0.15);
+
+            display: flex;
+
+        }
+
+
+        /* LEFT SIDE */
+
+        .left {
+
+            width: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd,
+                    #084298
+                );
+
+            color: white;
+
+            padding: 55px 45px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+        }
+
+
+        .hospital-icon {
+
+            font-size: 65px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .left h1 {
+
+            font-size: 34px;
+
+            line-height: 1.2;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .left p {
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            opacity: 0.9;
+
+        }
+
+
+        .features {
+
+            margin-top: 30px;
+
+        }
+
+
+        .feature {
+
+            margin: 13px 0;
+
+            font-size: 15px;
+
+        }
+
+
+        /* RIGHT SIDE */
+
+        .right {
+
+            width: 50%;
+
+            padding: 55px 50px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+        }
+
+
+        .right h2 {
+
+            color: #123b64;
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .subtitle {
+
+            color: #6b7280;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* FORM */
+
+        label {
+
+            display: block;
+
+            color: #374151;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid #d5dce5;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            margin-bottom: 20px;
+
+            outline: none;
+
+        }
+
+
+        input:focus {
+
+            border-color: #0d6efd;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(13, 110, 253, 0.1);
+
+        }
+
+
+        button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0d6efd,
+                    #084298
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+        }
+
+
+        button:hover {
+
+            opacity: 0.92;
+
+        }
+
+
+        .demo {
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            background: #f1f7ff;
+
+            border-radius: 9px;
+
+            color: #315777;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+
+        }
+
+
+        /* MOBILE */
+
+        @media(max-width: 700px) {
+
+            .container {
+
+                flex-direction: column;
+
+            }
+
+
+            .left,
+            .right {
+
+                width: 100%;
+
+            }
+
+
+            .left {
+
+                padding: 35px;
+
+                text-align: center;
+
+            }
+
+
+            .left h1 {
+
+                font-size: 27px;
+
+            }
+
+
+            .features {
+
+                display: none;
+
+            }
+
+
+            .right {
+
+                padding: 35px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- LEFT -->
+
+    <div class="left">
+
+        <div class="hospital-icon">
+            🏥
+        </div>
+
+
+        <h1>
+            Smart Patient
+            Case-Taking System
+        </h1>
+
+
+        <p>
+            A digital platform for
+            patient registration,
+            case-taking and vital
+            sign management.
+        </p>
+
+
+        <div class="features">
+
+            <div class="feature">
+                ✓ Patient Registration
+            </div>
+
+            <div class="feature">
+                ✓ Digital Case Sheet
+            </div>
+
+            <div class="feature">
+                ✓ Temperature Monitoring
+            </div>
+
+            <div class="feature">
+                ✓ Patient Visit History
+            </div>
+
+            <div class="feature">
+                ✓ General Medicine & Pediatrics
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RIGHT -->
+
+    <div class="right">
+
+        <h2>
+            Welcome Back
+        </h2>
+
+        <p class="subtitle">
+            Login to access the system
+        </p>
+
+
+        <form method="POST"
+              action="/login">
+
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter username"
+                required
+            >
+
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <div class="demo">
+
+            <b>Demo Login</b><br>
+
+            Admin:
+            <b>admin</b> /
+            <b>admin123</b>
+
+            <br>
+
+            Doctor:
+            <b>doctor</b> /
+            <b>doctor123</b>
+
+        </div>
+
+
+        <div class="footer">
+
+            Smart Patient Case-Taking System
+            <br>
+            Healthcare Management Prototype
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
