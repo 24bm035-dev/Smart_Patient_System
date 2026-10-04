@@ -695,20 +695,19 @@ def get_sensors():
 # START APPLICATION
 # =========================================================
 
-if __name__ == "__main__":
+# =========================================================
+# START APPLICATION
+# =========================================================
 
-    init_db()
+init_db()
+
+if __name__ == "__main__":
 
     print()
     print("======================================")
     print(" SMART PATIENT CASE-TAKING SYSTEM")
     print("======================================")
     print("Server starting...")
-    print("Laptop IP: http://10.208.171.46:8000")
-    print("Sensor API:")
-    print("POST /api/sensor")
-    print("GET  /api/fsr")
-    print("GET  /api/sensors")
     print("======================================")
     print()
 
