@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>General Medicine - Patient Case</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+        }
+
+        .header {
+            background: #1976d2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .header p {
+            margin: 6px 0 0;
+            font-size: 15px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 30px auto;
+        }
+
+        .patient-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .patient-card h2 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+
+        .patient-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .patient-info div {
+            background: #f5f8fc;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            color: #1976d2;
+            border-bottom: 2px solid #e5e5e5;
+            padding-bottom: 10px;
+        }
+
+        .sensor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .sensor-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            background: #fafafa;
+        }
+
+        .sensor-card h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .sensor-value {
+            width: 100%;
+            padding: 14px;
+            font-size: 22px;
+            font-weight: bold;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: #f5f5f5;
+        }
+
+        .sensor-status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 7px;
+            font-size: 14px;
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .connected {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .waiting {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input[readonly] {
+            background: #f1f1f1;
+            cursor: not-allowed;
+        }
+
+        .button-area {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .save-button {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background: #125ca5;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 13px 25px;
+            background: #777;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 700px) {
+
+            .patient-info,
+            .sensor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+    <h1>General Medicine</h1>
+
+    <p>
+        Smart Patient Case-Taking System
+    </p>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- ================= PATIENT INFORMATION ================= -->
+
+    <div class="patient-card">
+
+        <h2>Patient Information</h2>
+
+        <div class="patient-info">
+
+            <div>
+                <strong>Patient ID:</strong>
+                {{ patient["id"] }}
+            </div>
+
+            <div>
+                <strong>Name:</strong>
+                {{ patient["name"] }}
+            </div>
+
+            <div>
+                <strong>Age:</strong>
+                {{ patient["age"] }}
+            </div>
+
+            <div>
+                <strong>Gender:</strong>
+                {{ patient["gender"] }}
+            </div>
+
+            <div>
+                <strong>Department:</strong>
+                {{ patient["department"] }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= CASE FORM ================= -->
+
+    <form method="POST" action="{{ url_for('save_general') }}">
+
+        <input
+            type="hidden"
+            name="patient_id"
+            value="{{ patient['id'] }}"
+        >
+
+
+        <!-- ================= SENSOR SECTION ================= -->
+
+        <div class="section">
+
+            <h2>Temperature and Pressure/Force Monitoring</h2>
+
+            <div class="sensor-grid">
+
+
+                <!-- TEMPERATURE -->
+
+                <div class="sensor-card">
+
+                    <h3>🌡 Temperature</h3>
+
+                    <input
+                        type="number"
+                        id="temperature"
+                        name="temperature"
+                        step="0.01"
+                        class="sensor-value"
+                        placeholder="Waiting..."
+                        readonly
+                    >
+
+                    <div
+                        id="temperatureStatus"
+                        class="sensor-status waiting"
+                    >
+                        🔴 Waiting for DS18B20...
+                    </div>
+
+                </div>
+
+
+                <!-- FSR -->
+
+                <div class="sensor-card">
+
+                    <h3>🖐 Pressure / Force</h3>
+
+                    <input
+                        type="number"
+                        id="pressure"
+                        name="pressure"
+                        step="0.1"
+                        class="sensor-value"
+                        placeholder="Waiting..."
+                        readonly
+                    >
+
+                    <div
+                        id="fsrStatus"
+                        class="sensor-status waiting"
+                    >
+                        🔴 Waiting for FSR sensor...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= PATIENT CASE DETAILS ================= -->
+
+        <div class="section">
+
+            <h2>Patient Case Details</h2>
+
+
+            <!-- COMPLAINT -->
+
+            <label for="complaint">
+                Chief Complaint
+            </label>
+
+            <textarea
+                id="complaint"
+                name="complaint"
+                placeholder="Enter patient's main complaint"
+                required
+            ></textarea>
+
+
+            <!-- HISTORY -->
+
+            <label for="history">
+                Patient History
+            </label>
+
+            <textarea
+                id="history"
+                name="history"
+                placeholder="Enter relevant patient history"
+            ></textarea>
+
+
+            <!-- DIAGNOSIS -->
+
+            <label for="diagnosis">
+                Diagnosis
+            </label>
+
+            <textarea
+                id="diagnosis"
+                name="diagnosis"
+                placeholder="Enter diagnosis"
+            ></textarea>
+
+
+        </div>
+
+
+        <!-- ================= BUTTONS ================= -->
+
+        <div class="button-area">
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                💾 Save Visit
+            </button>
+
+            <a
+                href="{{ url_for('patient', patient_id=patient['id']) }}"
+                class="back-button"
+            >
+                Back
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- ================= LIVE SENSOR JAVASCRIPT ================= -->
+
+<script>
+
+function updateSensors() {
+
+    fetch("/api/sensors")
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Server returned " + response.status
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(data => {
+
+
+            /* =====================================
+               TEMPERATURE
+            ===================================== */
+
+            const temperatureField =
+                document.getElementById("temperature");
+
+            const temperatureStatus =
+                document.getElementById("temperatureStatus");
+
+
+            if (
+                data.temperature !== undefined &&
+                data.temperature !== null
+            ) {
+
+                temperatureField.value =
+                    Number(data.temperature).toFixed(2);
+
+                temperatureStatus.innerHTML =
+                    "🟢 DS18B20 Connected | Live: "
+                    + Number(data.temperature).toFixed(2)
+                    + " °C";
+
+                temperatureStatus.className =
+                    "sensor-status connected";
+
+            }
+
+
+            /* =====================================
+               FSR
+            ===================================== */
+
+            const pressureField =
+                document.getElementById("pressure");
+
+            const fsrStatus =
+                document.getElementById("fsrStatus");
+
+
+            if (
+                data.fsr !== undefined &&
+                data.fsr !== null
+            ) {
+
+                pressureField.value =
+                    data.fsr;
+
+                fsrStatus.innerHTML =
+                    "🟢 FSR Connected | Live Value: "
+                    + data.fsr;
+
+                fsrStatus.className =
+                    "sensor-status connected";
+
+            }
+
+        })
+
+        .catch(error => {
+
+            console.log(
+                "Sensor connection error:",
+                error
+            );
+
+            document.getElementById(
+                "temperatureStatus"
+            ).innerHTML =
+                "🔴 Unable to receive temperature data";
+
+            document.getElementById(
+                "temperatureStatus"
+            ).className =
+                "sensor-status waiting";
+
+
+            document.getElementById(
+                "fsrStatus"
+            ).innerHTML =
+                "🔴 Unable to receive FSR data";
+
+            document.getElementById(
+                "fsrStatus"
+            ).className =
+                "sensor-status waiting";
+
+        });
+
+}
+
+
+/* First reading immediately */
+updateSensors();
+
+
+/* Update every 1 second */
+setInterval(
+    updateSensors,
+    1000
+);
+
+</script>
+
+</body>
+</html>

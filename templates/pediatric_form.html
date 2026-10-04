@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Pediatrics Case Sheet</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f8fb;
+            color: #1f2937;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header {
+            background: #0d6efd;
+            color: white;
+            padding: 22px 35px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .header p {
+            margin: 6px 0 0;
+            opacity: 0.9;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        /* ================= PATIENT CARD ================= */
+
+        .patient-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .patient-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .patient-title h2 {
+            margin: 0;
+            color: #123b5d;
+        }
+
+        .department {
+            background: #e7f1ff;
+            color: #0d6efd;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .patient-details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .detail {
+            background: #f8fafc;
+            padding: 14px;
+            border-radius: 10px;
+        }
+
+        .detail small {
+            display: block;
+            color: #6b7280;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        .detail strong {
+            font-size: 16px;
+        }
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            color: #123b5d;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* ================= VITAL SIGN ================= */
+
+        .vital-box {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 3px rgba(13,110,253,0.1);
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        /* ================= PEDIATRIC GRID ================= */
+
+        .pediatric-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        button,
+        .back-btn {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .save-btn {
+            background: #198754;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #157347;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            color: white;
+        }
+
+        .back-btn:hover {
+            background: #565e64;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .patient-details,
+            .pediatric-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+        @media (max-width: 450px) {
+
+            .container {
+                padding: 15px;
+            }
+
+            .patient-details,
+            .pediatric-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 21px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+    <h1>🏥 Smart Patient Case-Taking System</h1>
+
+    <p>Pediatrics - New Patient Visit</p>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- ================= PATIENT DETAILS ================= -->
+
+    <div class="patient-card">
+
+        <div class="patient-title">
+
+            <h2>👶 Patient Details</h2>
+
+            <div class="department">
+                👶 Pediatrics
+            </div>
+
+        </div>
+
+
+        <div class="patient-details">
+
+
+            <!-- PATIENT ID -->
+
+            <div class="detail">
+
+                <small>Patient ID</small>
+
+                <strong>
+                    {{ patient["id"] }}
+                </strong>
+
+            </div>
+
+
+            <!-- NAME -->
+
+            <div class="detail">
+
+                <small>Name</small>
+
+                <strong>
+                    {{ patient["name"] }}
+                </strong>
+
+            </div>
+
+
+            <!-- AGE -->
+
+            <div class="detail">
+
+                <small>Age</small>
+
+                <strong>
+                    {{ patient["age"] }} years
+                </strong>
+
+            </div>
+
+
+            <!-- GENDER -->
+
+            <div class="detail">
+
+                <small>Gender</small>
+
+                <strong>
+                    {{ patient["gender"] }}
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= FORM ================= -->
+
+    <div class="form-card">
+
+        <h2 class="section-title">
+            👶 New Pediatric Visit
+        </h2>
+
+
+        <form method="POST" action="/save_pediatric">
+
+
+            <!-- HIDDEN PATIENT ID -->
+
+            <input
+                type="hidden"
+                name="patient_id"
+                value="{{ patient['id'] }}"
+            >
+
+
+            <!-- ================= VITAL SIGN ================= -->
+
+            <div class="vital-box">
+
+                <h3 class="section-title">
+                    🌡️ Vital Sign
+                </h3>
+
+
+                <div class="form-group">
+
+                    <label>
+                        🌡️ Body Temperature (°C)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="temperature"
+                        step="0.1"
+                        value="36.8"
+                        required
+                    >
+
+                    <div class="hint">
+                        Temperature from DS18B20 sensor
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= PEDIATRIC INFORMATION ================= -->
+
+            <h3 class="section-title">
+                📝 Pediatric Information
+            </h3>
+
+
+            <!-- CHIEF COMPLAINT -->
+
+            <div class="form-group">
+
+                <label>
+                    🗣️ Chief Complaint
+                </label>
+
+                <textarea
+                    name="complaint"
+                    rows="4"
+                    placeholder="Enter child's main complaint..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+
+            <!-- WEIGHT + HEIGHT -->
+
+            <div class="pediatric-grid">
+
+
+                <!-- WEIGHT -->
+
+                <div class="form-group">
+
+                    <label>
+                        ⚖️ Weight (kg)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="weight"
+                        step="0.1"
+                        placeholder="Enter weight"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- HEIGHT -->
+
+                <div class="form-group">
+
+                    <label>
+                        📏 Height (cm)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="height"
+                        step="0.1"
+                        placeholder="Enter height"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ================= VACCINATION ================= -->
+
+            <div class="form-group">
+
+                <label>
+                    💉 Vaccination Status
+                </label>
+
+                <select
+                    name="vaccination"
+                    required
+                >
+
+                    <option value="">
+                        Select Status
+                    </option>
+
+                    <option value="Up to date">
+                        Up to date
+                    </option>
+
+                    <option value="Partially completed">
+                        Partially completed
+                    </option>
+
+                    <option value="Not vaccinated">
+                        Not vaccinated
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- ================= BUTTONS ================= -->
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="save-btn"
+                >
+                    💾 Save Pediatric Case
+                </button>
+
+
+                <a
+                    href="/patient/{{ patient['id'] }}"
+                    class="back-btn"
+                >
+                    ← Back to Patient Profile
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <div class="footer">
+
+        Smart Patient Case-Taking System |
+        IoT-Based Vital Sign Acquisition
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

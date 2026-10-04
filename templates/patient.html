@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Patient Profile</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f8fb;
+            color: #1f2937;
+        }
+
+        .header {
+            background: #0d6efd;
+            color: white;
+            padding: 22px 35px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        .header p {
+            margin: 6px 0 0;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        .profile {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .profile-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .profile-title h2 {
+            margin: 0;
+            color: #123b5d;
+        }
+
+        .department {
+            background: #e7f1ff;
+            color: #0d6efd;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .detail-box {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .detail-box small {
+            color: #6b7280;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+
+        .detail-box strong {
+            font-size: 17px;
+        }
+
+        .history {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .history h2 {
+            margin-top: 0;
+            color: #123b5d;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th {
+            background: #0d6efd;
+            color: white;
+            padding: 13px;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .visit-number {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+
+        /* TEMPERATURE STATUS */
+
+        .temp-normal {
+            background: #d1fae5;
+            color: #047857;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .temp-high {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .temp-low {
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .temp-not-recorded {
+            color: #777;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .add {
+            background: #198754;
+        }
+
+        .patients {
+            background: #0d6efd;
+        }
+
+        .home {
+            background: #6c757d;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+
+            .details {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .container {
+                padding: 15px;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 21px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <h1>🏥 Smart Patient Case-Taking System</h1>
+
+    <p>
+        Patient Profile & Visit History
+    </p>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- PATIENT PROFILE -->
+
+    <div class="profile">
+
+        <div class="profile-title">
+
+            <h2>
+                👤 Patient Profile
+            </h2>
+
+            <div class="department">
+
+                🏥 {{ patient.department }}
+
+            </div>
+
+        </div>
+
+
+        <div class="details">
+
+            <div class="detail-box">
+
+                <small>Patient ID</small>
+
+                <strong>
+                    {{ patient.id }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>Name</small>
+
+                <strong>
+                    {{ patient.name }}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>Age</small>
+
+                <strong>
+                    {{ patient.age }} years
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>Gender</small>
+
+                <strong>
+                    {{ patient.gender }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- VISIT HISTORY -->
+
+    <div class="history">
+
+        <h2>
+            📋 Visit History
+        </h2>
+
+
+        {% if visits %}
+
+        <div class="table-container">
+
+            <table>
+
+                <tr>
+
+                    <th>Visit</th>
+
+                    <th>Temperature</th>
+
+                    <th>Pressure / Force</th>
+
+                    <th>Complaint</th>
+
+                    <th>Diagnosis</th>
+
+                    <th>Date</th>
+
+                </tr>
+
+
+                {% for visit in visits %}
+
+                <tr>
+
+                    <td class="visit-number">
+
+                        Visit {{ visit.visit_number }}
+
+                    </td>
+
+
+                    <!-- TEMPERATURE STATUS -->
+
+                    <td>
+
+                        {% if visit.temperature %}
+
+                            {% if visit.temperature >= 38 %}
+
+                                <span class="temp-high">
+                                    🔴 {{ visit.temperature }} °C — High
+                                </span>
+
+                            {% elif visit.temperature < 36 %}
+
+                                <span class="temp-low">
+                                    🔵 {{ visit.temperature }} °C — Low
+                                </span>
+
+                            {% else %}
+
+                                <span class="temp-normal">
+                                    🟢 {{ visit.temperature }} °C — Normal
+                                </span>
+
+                            {% endif %}
+
+                        {% else %}
+
+                            <span class="temp-not-recorded">
+                                Not recorded
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- PRESSURE / FORCE -->
+
+                    <td>
+
+                        {% if visit.pressure %}
+
+                            {{ visit.pressure }}
+
+                        {% else %}
+
+                            Not recorded
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- COMPLAINT -->
+
+                    <td>
+
+                        {{ visit.complaint or "Not recorded" }}
+
+                    </td>
+
+
+                    <!-- DIAGNOSIS -->
+
+                    <td>
+
+                        {{ visit.diagnosis or "Not recorded" }}
+
+                    </td>
+
+
+                    <!-- DATE -->
+
+                    <td>
+
+                        {{ visit.date }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+
+        {% else %}
+
+        <div class="empty">
+
+            <h3>📭 No visits recorded yet</h3>
+
+            <p>
+                Add a new visit to start the patient's medical history.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <a
+                href="/visit/{{ patient.id }}"
+                class="btn add"
+            >
+                ➕ Add New Visit
+            </a>
+
+
+            <a
+                href="/patients"
+                class="btn patients"
+            >
+                📋 View All Patients
+            </a>
+
+
+            <a
+                href="/"
+                class="btn home"
+            >
+                🏠 Home
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+
+        Smart Patient Case-Taking System |
+        IoT-Based Vital Sign Acquisition
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>
